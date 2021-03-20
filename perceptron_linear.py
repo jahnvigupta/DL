@@ -84,6 +84,7 @@ def perceptron(X_train, y_train, epochs, learning_rate, error_diff):
         epochs: Number of epochs for training
         learning_rate: Learning rate for Gradient Descent
         beta: Parameter for sigmoid function
+        error_diff: Threshold on error difference between successive epochs
 
     Output: 
         w: Weight vector after training
