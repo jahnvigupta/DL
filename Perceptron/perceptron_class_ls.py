@@ -24,11 +24,11 @@ def read(file_name):
   return df
 
 #Reading class1 data into df1
-df1 = read("Group09/Classification/LS_Group09/Class1.txt")
+df1 = read("../Group09/Classification/LS_Group09/Class1.txt")
 #Reading class2 data into df2
-df2 = read("Group09/Classification/LS_Group09/Class2.txt")
+df2 = read("../Group09/Classification/LS_Group09/Class2.txt")
 #Reading class3 data into df3
-df3 = read("Group09/Classification/LS_Group09/Class3.txt")
+df3 = read("../Group09/Classification/LS_Group09/Class3.txt")
 
 #append column with values 1 for bias term
 df1[0] = 1

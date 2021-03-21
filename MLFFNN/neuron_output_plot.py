@@ -1,3 +1,4 @@
+from mpl_toolkits.mplot3d import axes3d, Axes3D
 import numpy as np
 from MLFFNN import feedforward_1hidden
 from MLFFNN import feedforward_2hidden
@@ -62,7 +63,7 @@ def plot_output_1hidden(X, y, wij,wjk, beta):
     ax.set_xlabel('Feature 1')
     ax.set_ylabel('Feature 2')
     label = "Output Neuron"+str(i)
-    ax.set_zlabel('label')
+    ax.set_zlabel(label)
     plt.savefig(label)
 
 def plot_output_2hidden(X, y, wij1, wj1j2, wj2k, beta):
@@ -141,5 +142,5 @@ def plot_output_2hidden(X, y, wij1, wj1j2, wj2k, beta):
     ax.set_xlabel('Feature 1')
     ax.set_ylabel('Feature 2')
     label = "Output Neuron"+str(i)
-    ax.set_zlabel('label')
+    ax.set_zlabel(label)
     plt.savefig(label)

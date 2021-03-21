@@ -25,7 +25,7 @@ def read(file_name):
   return df
 
 #Reading data into df
-df = read("Group09/Classification/NLS_Group09.txt")
+df = read("../Group09/Classification/NLS_Group09.txt")
 
 # append column with values 1 for bias term
 df[0] = 1

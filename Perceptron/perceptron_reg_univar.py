@@ -15,63 +15,49 @@ def read(file_name):
     Output: 
         df: file stored as a dataframe
   """
-  df = pd.read_csv(file_name, header=None, sep=",", names=[1,2,3])
+  df = pd.read_csv(file_name, header=None, sep=",", names=[1,2])
   return df
 
 #Reading data into df
-df = read("Group09/Regression/BivariateData/9.csv")
-
-# Plotting 3d plot for data
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(df[[1]], df[[2]], df[[3]])
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Target Variable')
-ax.set_title("Complete Data Visualisation")
-
-# adding bias column
+df = read("../Group09/Regression/UnivariateData/9.csv")
 df[0] = 1
 # dividing data into X and y
-X = df[[0,1,2]]
-y = df[[3]]
+X = df[[0,1]]
+y = df[[2]]
 y = np.array(y).flatten()
 
-# defining epochs, learning_rate
-epochs = 10
+# defining epochs, learning_rate, beta, error_diff
+epochs = 500
 learning_rate = 0.001
 error_diff = 0.000001
 
 # Splitting dataset into X_train, X_test, X_val, y_train, y_test, y_val
 X_train, X_test, X_val, y_train, y_test, y_val = split_dataset(X,y)
 
+# Plotting Datasets
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Dataset Visualisation")
+plt.scatter(X[1],y)
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Training Data Visualisation")
+plt.scatter(X_train[1],y_train)
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Test Data Visualisation")
+plt.scatter(X_test[1],y_test)
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Validation Data Visualisation")
+plt.scatter(X_val[1],y_val)
+
 # Training perceptron model 
 w, epoch_num, epoch_error = perceptron(X_train, y_train, epochs, learning_rate, error_diff)
-
-# Plotting 3d plot for training, test, validation data
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_train[[1]], X_train[[2]], y_train)
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Target Variable')
-ax.set_title("Training Data Visualisation")
-
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_test[[1]], X_test[[2]], y_test)
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Target Variable')
-ax.set_title("Test Data Visualisation")
-
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_val[[1]], X_val[[2]], y_val)
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Target Variable')
-ax.set_title("Validation Data Visualisation")
 
 # Plotting epoch errors for perceptron trained
 plt.figure()
@@ -94,36 +80,31 @@ pred_val = []
 for i in range(len(X_val)):
   pred_val.append(pred_linear_act(X_val.iloc[i], w))
 
-# Plotting 3d plot for training, test, validation data with target and predicted outputs
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_train[[1]], X_train[[2]], y_train, c= 'b', label="Target Values")
-ax.scatter3D(X_train[[1]], X_train[[2]], pred_train, c='r', label="Predicted Values")
-ax.legend()
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Output')
-ax.set_title("Training Data Visualisation")
+# Plotting target output and predicted output with input data for training, test and validation
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Training data")
+plt.scatter(X_train[1], y_train, c='b')
+plt.scatter(X_train[1], pred_train, c='r')
 
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_test[[1]], X_test[[2]], y_test, c= 'b', label="Target Values")
-ax.scatter3D(X_test[[1]], X_test[[2]], pred_test, c='r', label="Predicted Values")
-ax.legend()
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Output')
-ax.set_title("Test Data Visualisation")
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Test data")
+plt.scatter(X_test[1], y_test, c='b')
+plt.scatter(X_test[1], pred_test, c='r')
 
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.scatter3D(X_val[[1]], X_val[[2]], y_val, c= 'b', label="Target Values")
-ax.scatter3D(X_val[[1]], X_val[[2]], pred_val, c='r', label="Predicted Values")
-ax.legend()
-ax.set_xlabel('Feature 1')
-ax.set_ylabel('Feature 2')
-ax.set_zlabel('Output')
-ax.set_title("Validation Data Visualisation")
+plt.figure()
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Training data")
+plt.scatter(X_train[1], y_train, c='b')
+plt.scatter(X_train[1], pred_train, c='r')
+plt.ylabel("y")
+plt.title("Validation data")
+plt.scatter(X_val[1], y_val, c='b')
+plt.scatter(X_val[1], pred_val, c='r')
 
 # calculating error for training, test, validation data
 training_error = error(y_train,pred_train)
@@ -158,4 +139,3 @@ plt.xlabel("Target Output")
 plt.ylabel("Predicted Output")
 plt.title("Predicted vs target output for validation data")
 plt.scatter(y_val,pred_val)
-

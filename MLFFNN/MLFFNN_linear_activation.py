@@ -36,7 +36,7 @@ def feedforward_1hidden(x,wij,wjk,beta):
 
   # computation through output layer
   ank = wjk.T.dot(snj_bias)
-  snk = sigmoid_vector(ank, beta)
+  snk = ank
   return anj, snj, ank, snk
 
 def update_wjk_1hidden(yk, sk, ak, beta, sj_bias, learning_rate):
@@ -53,7 +53,7 @@ def update_wjk_1hidden(yk, sk, ak, beta, sj_bias, learning_rate):
         update: Update to wjk
   """
   # derivative of f(ak)
-  d_f = beta*sk*(1-sk)
+  d_f = np.ones(len(sk))
   delta_k = (yk-sk)*d_f
   update = learning_rate*np.outer(sj_bias,delta_k)
   return update
@@ -73,7 +73,7 @@ def update_wij_1hidden(x, yk, sk, ak, wjk, beta, sj, learning_rate):
     Output: 
         update: Update to wjk
   """
-  d_fk = beta*sk*(1-sk)
+  d_fk = np.ones(len(sk))
   delta_k = (yk-sk)*d_fk
   temp = np.dot(delta_k,wjk[1:,:].T)
   d_fj = beta*sj*(1-sj)
@@ -170,7 +170,7 @@ def feedforward_2hidden(x,wij1,wj1j2,wj2k,beta):
 
   # computation through output layer
   ank = wj2k.T.dot(snj2_bias)
-  snk = sigmoid_vector(ank, beta)
+  snk = ank
   return anj1, snj1, anj2, snj2, ank, snk
 
 def update_wj2k_2hidden(yk, sk, ak, beta, sj2, learning_rate):
@@ -186,7 +186,7 @@ def update_wj2k_2hidden(yk, sk, ak, beta, sj2, learning_rate):
     Output: 
         update: Update to wj2k
   """
-  d_f = beta*sk*(1-sk)
+  d_f = np.ones(len(sk))
   delta_k = (yk-sk)*d_f
   sj2_bias = np.append(1,sj2) # sj2 with bias term
   update = learning_rate*np.outer(sj2_bias,delta_k)
@@ -207,7 +207,7 @@ def update_wj1j2_2hidden(sj1, yk, snk, ak, wj2k, beta, sj2, learning_rate):
     Output: 
         update: Update to wj1j2
   """
-  d_fk = beta*snk*(1-snk)
+  d_fk = np.ones(len(snk))
   delta_k = (yk-snk)*d_fk
   temp = np.dot(delta_k,wj2k[1:,:].T)
   d_fj2 = beta*sj2*(1-sj2)
@@ -234,7 +234,7 @@ def update_wij1_2hidden(x, sj1, sj2, yk, snk, wj2k, wj1j2, beta, learning_rate):
   """
   d_fj1 = beta*sj1*(1-sj1)
   d_fj2 = beta*sj2*(1-sj2)
-  d_sk = beta*snk*(1-snk)
+  d_sk = np.ones(len(snk))
   m1 = wj2k[1:,:]
   for i in range(len(m1)):
     m1[i] = m1[i]*d_fj2[i]
