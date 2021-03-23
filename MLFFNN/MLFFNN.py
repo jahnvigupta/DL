@@ -280,15 +280,8 @@ def mlffnn_2hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_di
   # Converting X_train to numpy array
   X_train = np.array(X_train)
 
-  # Running iteration through all the training points till difference between consecutive errors is above threshold
-  while(len(epoch_num)<=2 or ((-epoch_error[i-1]+epoch_error[i-2])>error_diff or epoch_error[i-2]<epoch_error[i-1])):
-    # Condition learning_rate on iteration number
-    if(i<50):
-      learning_rate = 0.1
-    elif(i<200):
-      learning_rate = 0.001
-    else:
-      learning_rate = 0.0001
+  # Running iteration through all the training points till error is greater than 0.001
+  while(len(epoch_num)<=2 or (epoch_error[i-1])>0.001):
     # Shuffle training data for each epoch
     X_train, y_train = shuffle(X_train, y_train)
     # predictions is used for storing the predictions of the model for training data

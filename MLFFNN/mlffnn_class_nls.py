@@ -10,6 +10,10 @@ import pandas as pd
 import numpy as np
 from eval_param import confusion_matrix
 from eval_param import accuracy
+from MLFFNN import mlffnn_2hidden_layer
+from neuron_output_plot import plot_output_2hidden
+from class_predic_MLFFNN import class_prediction_2hidden
+from decision_plot_MLFFNN import decision_plot_2hidden_MLFFNN
 
 def read(file_name):
   """
@@ -110,15 +114,10 @@ predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
 conf_mat_val = confusion_matrix(predictions_val, y_val_single)
 # accuracy for validation data
 accuracy_val = accuracy(conf_mat_val)
-
+print("J = 3")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
 print("Accuracy for validation data is : ", accuracy_val)
-print("Confusion Matrix for training data : \n", conf_mat_val)
-
-# making decision plot for MLFFNN with 1 hidden layer with 3 neurons with data visualisation
-decision_plot_1hidden_MLFFNN(wij, wjk, beta, min_0, max_0, min_1, max_1)
-plt.scatter(df1[1], df1[2], c='r')
-plt.scatter(df2[1], df2[2], c='b')
-plt.scatter(df3[1], df3[2], c='g')
+print("\n")
 
 J = 4
 # Training MLFFNN with 1 hidden layer
@@ -131,15 +130,10 @@ predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
 conf_mat_val = confusion_matrix(predictions_val, y_val_single)
 # accuracy for validation data
 accuracy_val = accuracy(conf_mat_val)
-
+print("J = 4")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
 print("Accuracy for validation data is : ", accuracy_val)
-print("Confusion Matrix for training data : \n", conf_mat_val)
-
-# making decision plot for MLFFNN with 1 hidden layer with 4 neurons with data visualisation
-decision_plot_1hidden_MLFFNN(wij, wjk, beta, min_0, max_0, min_1, max_1)
-plt.scatter(df1[1], df1[2], c='r')
-plt.scatter(df2[1], df2[2], c='b')
-plt.scatter(df3[1], df3[2], c='g')
+print("\n")
 
 J = 6
 # Training MLFFNN with 1 hidden layer
@@ -152,17 +146,12 @@ predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
 conf_mat_val = confusion_matrix(predictions_val, y_val_single)
 # accuracy for validation data
 accuracy_val = accuracy(conf_mat_val)
-
+print("J = 6")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
 print("Accuracy for validation data is : ", accuracy_val)
-print("Confusion Matrix for training data : \n", conf_mat_val)
+print("\n")
 
-# making decision plot for MLFFNN with 1 hidden layer with 6 neurons with data visualisation
-decision_plot_1hidden_MLFFNN(wij, wjk, beta, min_0, max_0, min_1, max_1)
-plt.scatter(df1[1], df1[2], c='r')
-plt.scatter(df2[1], df2[2], c='b')
-plt.scatter(df3[1], df3[2], c='g')
-
-J = 10
+J = 8
 # Training MLFFNN with 1 hidden layer
 epoch_error, epoch_num, wij, wjk = mlffnn_1hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_diff, J)
 
@@ -173,15 +162,10 @@ predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
 conf_mat_val = confusion_matrix(predictions_val, y_val_single)
 # accuracy for validation data
 accuracy_val = accuracy(conf_mat_val)
-
+print("J = 8")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
 print("Accuracy for validation data is : ", accuracy_val)
-print("Confusion Matrix for training data : \n", conf_mat_val)
-
-# making decision plot for MLFFNN with 1 hidden layer with 8 neurons with data visualisation
-decision_plot_1hidden_MLFFNN(wij, wjk, beta, min_0, max_0, min_1, max_1)
-plt.scatter(df1[1], df1[2], c='r')
-plt.scatter(df2[1], df2[2], c='b')
-plt.scatter(df3[1], df3[2], c='g')
+print("\n")
 
 J = 12
 # Training MLFFNN with 1 hidden layer
@@ -194,25 +178,57 @@ predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
 conf_mat_val = confusion_matrix(predictions_val, y_val_single)
 # accuracy for validation data
 accuracy_val = accuracy(conf_mat_val)
-
+print("J = 12")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
 print("Accuracy for validation data is : ", accuracy_val)
-print("Confusion Matrix for training data : \n", conf_mat_val)
+print("\n")
 
-# making decision plot for MLFFNN with 1 hidden layer with 12 neurons with data visualisation
-decision_plot_1hidden_MLFFNN(wij, wjk, beta, min_0, max_0, min_1, max_1)
-plt.scatter(df1[1], df1[2], c='r')
-plt.scatter(df2[1], df2[2], c='b')
-plt.scatter(df3[1], df3[2], c='g')
+J = 16
+# Training MLFFNN with 1 hidden layer
+epoch_error, epoch_num, wij, wjk = mlffnn_1hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_diff, J)
 
-# predictions for test= data
+print("Cross validation for 1 hidden layer with 16 neurons")
+# predictions for validation data
+predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
+# Confusion matrix for validation data
+conf_mat_val = confusion_matrix(predictions_val, y_val_single)
+# accuracy for validation data
+accuracy_val = accuracy(conf_mat_val)
+print("J = 16")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
+print("Accuracy for validation data is : ", accuracy_val)
+print("\n")
+
+J = 30
+# Training MLFFNN with 1 hidden layer
+epoch_error, epoch_num, wij, wjk = mlffnn_1hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_diff, J)
+
+print("Cross validation for 1 hidden layer with 30 neurons")
+# predictions for validation data
+predictions_val = class_prediction_1hidden(X_val, wij, wjk, beta)
+# Confusion matrix for validation data
+conf_mat_val = confusion_matrix(predictions_val, y_val_single)
+# accuracy for validation data
+accuracy_val = accuracy(conf_mat_val)
+print("J = 30")
+print("Confusion Matrix for validation data : \n", conf_mat_val)
+print("Accuracy for validation data is : ", accuracy_val)
+print("\n")
+
+print("After cross validation J = 16 is chosen\n")
+J = 16
+# Training MLFFNN with 1 hidden layer
+epoch_error, epoch_num, wij, wjk = mlffnn_1hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_diff, J)
+
+# predictions for test data
 predictions_test = class_prediction_1hidden(X_test, wij, wjk, beta)
 # Confusion matrix for test data
 conf_mat_test = confusion_matrix(predictions_test, y_test_single)
 # accuracy for test data
 accuracy_test = accuracy(conf_mat_test)
 
+print("Confusion Matrix for test data : \n", conf_mat_test)
 print("Accuracy for test data is : ", accuracy_test)
-print("Confusion Matrix for testing data : \n", conf_mat_test)
 
 # predictions for training data
 predictions_train = class_prediction_1hidden(X_train, wij, wjk, beta)
@@ -221,8 +237,8 @@ conf_mat_train = confusion_matrix(predictions_train, y_train_single)
 # accuracy for training data
 accuracy_train = accuracy(conf_mat_train)
 
-print("Accuracy for training data is : ", accuracy_train)
 print("Confusion Matrix for training data : \n", conf_mat_train)
+print("Accuracy for training data is : ", accuracy_train)
 
 # Plotting epoch error for the MLFFNN with one hidden layer
 plt.figure()
@@ -239,3 +255,59 @@ plt.scatter(df3[1], df3[2], c='g')
 
 # plotting output for each neuron
 plot_output_1hidden(X_train, y_train_single, wij,wjk, beta)
+
+# Training for 2 hidden layers
+# Number of neurons in first hidden layer
+J1 = 6
+# Number of neurons in second hidden layer
+J2 = 6
+# Learning rate is chosen as 0.1
+learning_rate = 0.1
+epoch_error, epoch_num, wij1, wj1j2, wj2k = mlffnn_2hidden_layer(X_train, y_train, epochs, learning_rate, beta, error_diff, J1, J2)
+
+print("Cross validation for 2 hidden layers with 6 neurons each")
+# predictions for validation data
+predictions_val = class_prediction_2hidden(X_val, wij1, wj1j2, wj2k, beta)
+# Confusion matrix for validation data
+conf_mat_val = confusion_matrix(predictions_val, y_val_single)
+# accuracy for validation data
+accuracy_val = accuracy(conf_mat_val)
+print("Confusion Matrix for validation data : \n", conf_mat_val)
+print("Accuracy for validation data is : ", accuracy_val)
+print("\n")
+
+# Plotting epoch error for the MLFFNN with one hidden layer
+plt.figure()
+plt.title("")
+plt.scatter(epoch_num, epoch_error)
+plt.xlabel("Epoch number")
+plt.ylabel("Epoch Error")
+
+# predictions for test data
+predictions_test = class_prediction_2hidden(X_test, wij1, wj1j2, wj2k, beta)
+# Confusion matrix for test data
+conf_mat_test = confusion_matrix(predictions_test, y_test_single)
+# accuracy for test data
+accuracy_test = accuracy(conf_mat_test)
+
+print("Confusion Matrix for test data : \n", conf_mat_test)
+print("Accuracy for test data is : ", accuracy_test)
+
+# predictions for training data
+predictions_train = class_prediction_2hidden(X_train, wij1, wj1j2, wj2k, beta)
+# Confusion matrix for training data
+conf_mat_train = confusion_matrix(predictions_train, y_train_single)
+# accuracy for training data
+accuracy_train = accuracy(conf_mat_train)
+
+print("Confusion Matrix for training data : \n", conf_mat_train)
+print("Accuracy for training data is : ", accuracy_train)
+
+# making decision plot with data visualisation
+decision_plot_2hidden_MLFFNN(wij1, wj1j2, wj2k, beta, min_0, max_0, min_1, max_1)
+plt.scatter(df1[1], df1[2], c='r')
+plt.scatter(df2[1], df2[2], c='b')
+plt.scatter(df3[1], df3[2], c='g')
+
+# plotting output for each neuron
+plot_output_2hidden(X_train, y_train_single, wij1, wj1j2, wj2k, beta)

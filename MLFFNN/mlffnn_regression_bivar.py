@@ -91,6 +91,12 @@ predictions_val = reg_value_prediction_1hidden(X_val, wij, wjk, beta)
 val_error = avg_error(y_val, predictions_val)
 print("Mean squared error in predictions for Validation data: ", val_error)
 
+# Plotting epoch errors for perceptron trained
+plt.figure()
+plt.scatter(epoch_num, epoch_error)
+plt.xlabel("Epoch number")
+plt.ylabel("Epoch Error")
+
 # predictions for test data
 predictions_test = reg_value_prediction_1hidden(X_test, wij, wjk, beta)
 # computing error for test data
